@@ -1,0 +1,8 @@
+{
+    "ignore": [
+        "./src/*"
+    ],
+    "events": {
+        "crash": "sh -c 'lsof -i :${PORT:-80} -t | xargs kill'"
+    }
+}
