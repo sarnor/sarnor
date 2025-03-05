@@ -22,3 +22,10 @@ setTimeout(() => {
 }, 100)
 
 console.log("ddddddddddddd");
+console.log("ddddddddddddd"); console.log("ddddddddddddd");
+
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrr');
