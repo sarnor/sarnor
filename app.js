@@ -15,7 +15,7 @@ const app = express();
 
 const fara = {
     name: 'Fara',
-    age: 'fffffffff'
+    age: 33
 }
 
 app.get('/fara', (req, res) => {
