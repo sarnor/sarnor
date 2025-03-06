@@ -27,6 +27,50 @@ module.exports = {
                     "less-loader",
                 ],
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+                options: {
+                    sources: {
+                        list: [
+                            {
+                                tag: "img",
+                                attribute: "data-src",
+                                type: "src",
+                            },
+                            {
+                                tag: "img",
+                                attribute: "data-srcset",
+                                type: "srcset",
+                            },
+                            {
+                                tag: "link",
+                                attribute: "href",
+                                type: "src",
+                                filter: (tag, attribute, attributes, resourcePath) => {
+                                    if (/my-html\.html$/.test(resourcePath)) {
+                                        return false;
+                                    }
+                                    if (!/stylesheet/i.test(attributes.rel)) {
+                                        return false;
+                                    }
+                                    if (
+                                        attributes.type &&
+                                        attributes.type.trim().toLowerCase() !== "text/css"
+                                    ) {
+                                        return false;
+                                    }
+                                    return true;
+                                },
+                            },
+                        ],
+                    },
+                },
+            },
         ]
     },
     devServer: {
