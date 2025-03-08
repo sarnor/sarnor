@@ -28,7 +28,7 @@ const runServer = async () => {
 
     app.use('/', express.static(path.join(__dirname, `dist`), { index: 'none' }));
 
-    app.get(`/*`, (req, res) => {
+    app.get(`/`, (req, res) => {
 
         fs.readFile(path.join(__dirname, `dist`, 'index.html'), 'utf8', (err, html) => {
             if (err) {
