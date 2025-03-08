@@ -15,6 +15,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.css$/i,
                 use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
             },
@@ -22,14 +27,35 @@ module.exports = {
                 test: /\.less$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "postcss-loader",
-                    "less-loader",
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader',
                 ],
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.sass$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.scss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader',
+                ],
+            },
+            {
+                test: /\.(svg|png|jpg|jpeg|webp|gif)$/i,
                 type: 'asset/resource',
+                generator: {
+                    filename: path.join('[path][name][ext]'),
+                },
             },
             {
                 test: /\.html$/i,
@@ -38,45 +64,46 @@ module.exports = {
                     sources: {
                         list: [
                             {
-                                tag: "img",
-                                attribute: "data-src",
-                                type: "src",
+                                tag: 'source',
+                                attribute: 'src-set',
+                                type: 'srcset'
                             },
                             {
-                                tag: "img",
-                                attribute: "data-srcset",
-                                type: "srcset",
+                                tag: 'img',
+                                attribute: 'data-src',
+                                type: 'src'
                             },
                             {
-                                tag: "link",
-                                attribute: "href",
-                                type: "src",
-                                filter: (tag, attribute, attributes, resourcePath) => {
-                                    if (/my-html\.html$/.test(resourcePath)) {
-                                        return false;
-                                    }
-                                    if (!/stylesheet/i.test(attributes.rel)) {
-                                        return false;
-                                    }
-                                    if (
-                                        attributes.type &&
-                                        attributes.type.trim().toLowerCase() !== "text/css"
-                                    ) {
-                                        return false;
-                                    }
-                                    return true;
-                                },
+                                tag: 'img',
+                                attribute: 'src',
+                                type: 'src'
                             },
+                            {
+                                tag: 'source',
+                                attribute: 'srcset',
+                                type: 'srcset'
+                            },
+                            {
+                                tag: 'source',
+                                attribute: 'data-srcset',
+                                type: 'srcset'
+                            }
                         ],
                     },
                 },
             },
-        ]
+        ],
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js", ".html", ".less", ".css", ".sass", ".scss", ".svg", ".jpg", ".webp"],
     },
     devServer: {
+        open: true,
+        liveReload: true,
+        hot: true,
         proxy: [
             {
-                context: ['/'],
+                context: '/',
                 target: 'http://127.0.0.1:80/',
             },
         ],
@@ -91,7 +118,8 @@ module.exports = {
             directory: path.join(__dirname, 'src'),
         },
         port: 8000,
-    }, plugins: [
+    },
+    plugins: [
         new MiniCssExtractPlugin({
             filename: "style/index.css",
         }),
