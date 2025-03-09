@@ -11,19 +11,7 @@ const compiler = Webpack(webpackConfig);
 const devServerOptions = { ...webpackConfig.devServer };
 const server = new WebpackDevServer(devServerOptions, compiler);
 
-
 const app = express();
-
-const fara = {
-    name: 'Fara',
-    age: 33
-}
-console.log('fffffffffffffffff');
-
-
-app.get('/fara', (req, res) => {
-    res.send(fara);
-})
 
 const runServer = async () => {
     await server.start();
@@ -34,7 +22,7 @@ const runServer = async () => {
 
         fs.readFile(path.join(__dirname, `dist`, 'index.html'), 'utf8', (err, html) => {
             if (err) {
-                console.error(err, 'Ошибка')
+                console.error(err, 'Error')
                 res.statusCode = 500;
                 res.send('html file not found')
                 return
