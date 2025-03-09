@@ -18,6 +18,8 @@ const fara = {
     name: 'Fara',
     age: 33
 }
+console.log('fffffffffffffffff');
+
 
 app.get('/fara', (req, res) => {
     res.send(fara);

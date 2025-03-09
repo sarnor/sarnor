@@ -1,15 +1,10 @@
 import '../style/index.css'
 import '../style/index.less';
 
-import htmlPages from './import/index.js';
+console.log(document.querySelector('h1'));
 
-import httpAjax from './ajax/index.js'
+const foot = (data = 'default') => console.log(data);
 
-const h1 = document.querySelector('h1')
-console.log(h1);
+foot('js')
 
-function foot(data = 'default') {
-    console.log(data);
-}
-
-h1.addEventListener('click', foot)
+document.querySelector('h2').addEventListener('click', () => foot('h2'))
